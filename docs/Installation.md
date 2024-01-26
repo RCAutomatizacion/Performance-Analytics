@@ -122,7 +122,7 @@ Deploy the S7 Connector configuration.
 
 
 ## Configure IIH Essentials
-Steps are created for an asset as aspects in IIH Essentilas and automatically applied in Performance Insight. An asset represent the stations and for each asset the aspects represents the steps. 
+Steps are created for an asset as aspects in IIH Essentilas and automatically applied in Performance Insight. An asset represents, for this example, a car production "Station". and for each asset the aspects represents the steps. 
 
 ![Dataservice Structure](graphics/Dataservice_Struktur.jpg)
 
