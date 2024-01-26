@@ -1,4 +1,4 @@
-# Configuration Steps
+# Configuration Steps.
 
 - [Configuration Steps](#configuration-steps)
   - [Configure PLC project in TIA Portal](#configure-plc-project-in-tia-portal)
