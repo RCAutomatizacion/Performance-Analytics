@@ -121,8 +121,8 @@ Hint: Username and password should be the same as was set in the IE Databus conf
 Deploy the S7 Connector configuration.
 
 
-## Configure Data Service
-Steps are created for an asset as aspects in the data service. An asset represent the stations and for each asset the aspects represents the steps. 
+## Configure IIH Essentials
+Steps are created for an asset as aspects in IIH Essentilas and automatically applied in Performance Insight. An asset represent the stations and for each asset the aspects represents the steps. 
 
 ![Dataservice Structure](graphics/Dataservice_Struktur.jpg)
 
