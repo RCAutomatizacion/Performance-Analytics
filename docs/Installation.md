@@ -71,9 +71,9 @@ When the configurator is open, add a user with the topic: `ie/#`. In this use ca
 
 Deploy the configuration.
 
-### Configure PLC Connectors
+### Configure OPC UA Connector
 
-Open your Management App and launch the OPC UA Connector configurator.
+In this part, connections with the PLCs are established. Open your Management App and launch the OPC UA Connector configurator.
 
 Add a new data source for PLC1 with the OPC UA connector:
 
