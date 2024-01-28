@@ -73,7 +73,7 @@ Deploy the configuration.
 
 ### Configure OPC UA Connector
 
-In this part, connection with the PLCs are established. Open your Management App and launch the OPC UA Connector configurator.
+In this part, connection with the first two PLCs are established using the OPC UA Connector. Open your Management App and launch the OPC UA Connector configurator.
 
 Add a new data source for PLC1 with the OPC UA connector:
 
@@ -98,6 +98,8 @@ Edit the settings:
 Hint: Username and password should be the same as was set in the IE Databus configuration, e.g., "edge" / "edge".
 
 Deploy the OPC UA Connector configuration.
+
+### Configure S7 Connector
 
 The third PLC is added as a data source with the following parameters with the S7 Connector:
 
