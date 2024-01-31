@@ -50,7 +50,7 @@ The option “Step time analysis” of the Edge App “Performance Insight” ne
 *	Access to an Industrial Edge Management System (IEM)
 *	Onboarded Industrial Edge Device (IED) on Industrial Edge Management
 *	Establish connection to 5 PLCs for getting data into the Edge Device
-*	Installed system configurators (S7 Connector Configurator, Databus Configurator)
+*	Installed system configurators (S7 Connector Configurator, Databus Configurator, Common Connector Configurator)
 *	Installed apps on IED (S7 Connector, Databus, IIH Essentials, Performance Insight)
 *	Google Chrome (Version ≥ 72)
 
@@ -76,7 +76,7 @@ Industrial Edge:
 *	Databus V2.3.1
 *	Databus Configurator V 2.3.1-4
 *	Common Configurator V1.9.0-4
-*	Common Connect Configurator V1.9.1-1
+*	Common Connector Configurator V1.9.1-1
 *	IIH Essentials V1.9.0
 *	Performance Insight V1.16.1
 *	WEB Browser (Google Chrome)
