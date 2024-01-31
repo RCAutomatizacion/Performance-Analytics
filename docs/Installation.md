@@ -15,7 +15,7 @@
 
 In order to set up the 'Step Time Analysis' dashboard within the Performance Insights application, it is essential to understand the flow of data across the system. The following diagram illustrates how data is communicated from the PLCs to the Industrial Edge Device, and subsequently processed by the Edge applications:
 
-<img id="flow-data" src="graphics/Picture1.png" alt="Data Flow Diagram for Performance Insights" width="600"/>
+<img id="flow-data" src="graphics/Architecture.png" alt="Data Flow Diagram for Performance Insights" width="600"/>
 
 To achieve this data flow, the following configurations will be explained:
 
@@ -25,9 +25,11 @@ To achieve this data flow, the following configurations will be explained:
 
 3. **Databus Configuration**: Integrate the MQTT-Broker to allow for a seamless data flow from the OPC UA and S7 Connectors to the higher-level Industrial Edge Applications.
 
-4. **IIH Essentials**: Install and configure the IIH Essentials application to ensure that the core industrial data from your PLCs can be effectively harnessed and utilized by the Edge Device. This setup is crucial for enabling comprehensive data collection and subsequent analysis within the Performance Insights application.
+4. **Common Configurator**: It serves as the initial configuration point to ensure that data is correctly identified and tagged for use by other applications, like IIH Essentials and Performance Insights.
 
-5. **Performance Insights Application Setup**: Within the Performance Insights application, configure the 'Step Time Analysis' feature by linking it to the respective asset models, which reflect the status of the sequential control steps from the PLCs.
+5. **IIH Essentials**: Install and configure the IIH Essentials application to ensure that the core industrial data from your PLCs can be effectively harnessed and utilized by the Edge Device. This setup is crucial for enabling comprehensive data collection and subsequent analysis within the Performance Insights application.
+
+6. **Performance Insights Application Setup**: Within the Performance Insights application, configure the 'Step Time Analysis' feature by linking it to the respective asset models, which reflect the status of the sequential control steps from the PLCs.
 
 ## Configure PLC project in TIA Portal
 This use case contains a TIA project which simulates the process. The project also inclundes a HMI visualization to operate the demonstration process. Download the TIA Portal project [here](../src/StepTimeAnalysis_20221129_1438.7z). The first steps are to configure the PLC project and the intruduction into the HMI screens.
@@ -70,13 +72,12 @@ Delay Select Screen:
 
 ## Configure PLC Connections in Industrial Edge
 
-We are now switching to the Edge part of this use case. Each of the following steps are done in the Industrial Edge system and, as explained in the Data Flow picture [above](#flow-data), we use the S7 Connector and OPC UA Connector on the Industrial Edge Device (IED) to read data from the PLCs and provide the data. Then, the data is sent via the connectors to the Databus, where the IIH Essentials can use the information for enabling comprehensive data collection and subsequent analysis within the Performance Insights application.
+We are now switching to the Edge part of this use case. Each of the following steps are done in the Industrial Edge system and, as explained in the Data Flow picture [above](#flow-data).
 
 In order to build this infrastructure, first, these apps must be configured correctly:
 
 * Databus
-* OPC UA Connector
-* S7 Connector
+* Common Configurator
 
 ### Configure Databus
 
@@ -94,93 +95,38 @@ Then, just click **Deploy** to apply the changes:
 
 ![Deployment](graphics/deploy_databus.png)
 
-### Configure OPC UA Connector
+### Configure Common Configurator
 
-In this part, connection with the **first two PLCs** are established using the OPC UA Connector. 
+In this part, the OPC UA Connector and S7 Connector are set-up from the Common configurator, but first Databus needs to be configured on Common Configurator.
 
-Go to the *Industrial Edge Management UI > Data Connections*, select "OPC UA Connector" and launch it on the onboarded Edge Device.
-
-Add a new data source for PLC1 with the OPC UA connector by clicking on "Add Data Source":
-
-![OPC UA1](graphics/OPC_UA1.png)
-
-Enter your OPC Server (PLC1) details as shown in the image and click "Add":
-
-![OPC UA2](graphics/OPC_UA2.png)
-
-Add the needed tags. This can be done by browsing or adding them manually. In this case, click on the "browse tags" icon:
-
-![OPC UA3](graphics/OPC_UA3.png)
-
-Select and add the tags that are named "DB_HMI"."ARG1_Seq1_S1" to "DB_HMI"."ARG1_Seq1_S19". Also add the String variable for the product "DB_Process_Var"."Car_Type_inProduction_Text":
-
-![OPC UA5](graphics/OPC_UA5.png)
-
-This variables indicate if the respective step is active right now.
-
-Now repeat the same process for the PLC2. 
-
-Before deploying the changes, edit the databus settings:
-
-![OPC UA6](graphics/OPC_UA6.png)
-
-Hint: Username and password should be the same as was set in the IE Databus configuration, e.g., "edge" / "edge".
-
-Deploy the OPC UA Connector by clicking "Deploy". After deployment the "Bus Adaptor" and the "Data Source" status of both PLCs should have green icon, like so:
-
-![OPC UA7](graphics/OPCUA7.png)
-
-If any issue is presented when configuring the OPC UA Connector, check [documentation](https://support.industry.siemens.com/cs/document/109811051/opc-ua-connector?dti=0&lc=en-US)
-
-### Configure S7 Connector
-
-In this section, the communication with the **third PLC** is configured using the S7 Connector; however, the communication is set up with the S7+ protocol.
-
-Go to the *Industrial Edge Management UI > Data Connections*, select "S7 Connector" and launch it on the onboarded Edge Device.
-
-Add a new data source for PLC3 with the S7 Connector by clicking on "Add Data Source":
-
-![S7+0](graphics/S7+0.png)
-
-Enter your PLC3 details as shown in the image and click "Add":
-
-![S7+1](graphics/S7+1.png)
-
-Use the browsing tool to add the same tags as in previous PLCs, similar to the method used during the OPC UA Connector configuration:
-
-![S7+2](graphics/S7+2.png)
-
-Now, the communication with the **fourth and fifth PLCs** are set up using the S7 Connector with the S7 protocol.
-
-Add a new data source for each PLC:
-
-PLC4 data source configuration:
+Go to *Edge Device UI > Apps*, click on Common Configurator to open the app and go to *Settings > Databus Credentials*, type the credentials for "Data Publisher Settings" and "Data Subscriber Settings" and click **save**. Now, the Databus is configured on the Common Configurator.
 
 IMAGEN
 
-PLC5 data source configuration:
+Now, it's time to set-up the OPC UA Connector on Common Configurator. To achive this, go to *Get Data > Connector Configuration*. In this tab the followings conditions must appear:
+
+* OPC UA Connector with green circle (indicating good status).
+* "Databus is installed" next to a green checkmark (indicating connection with Databus)
 
 IMAGEN
 
-Note that with the S7 classic protocol, tags can only be added manually or imported directly from the TIA Portal Project. 
+If those conditions are not shown, please revisit and repeat the reading process starting from this point.
 
-For this scenario, we will import the tags from TIA Portal using... (SEGUN DANIEL HAY UN ADD-IN FUNCTION QUE SE DEBE INSTALAR EN EL TIA PORTAL PARA PODER EXPORTAR LOS TAGS DE UN DB CON FORMATO .XML)
-
-Now, click on the "Import Tags" icon on the PLC4 data source and upload the file that was exported from TIA Portal and add the same tags as in previous PLCs:
+Click on the OPC UA Connector and click "Tags". Here the data sources (PLC1 and PLC2) are defined in order to extract data from them:
 
 IMAGEN
 
-Repeat the same process for the PLC5
-
-Before deploying the connector, edit the databus settings:
-
-![S7 Settings PW](graphics/S7_Connector_PW.png)
-
-Hint: Username and password should be the same as was set in the IE Databus configuration, e.g., "edge" / "edge".
-
-Deploy the S7 Connector by clicking "Deploy". After deployment the "Bus Adaptor" and the "Data Source" status of all PLCs should have green icon, like so:
+Select "Add Data Source" to add the PLC1 and type the device data, like so:
 
 IMAGEN
+
+Then just click **save** and the data source is added:
+
+IMAGEN
+
+Now, in order to add the needed tags, just click on "Actions" on the data source, select *Browse Tags > Start Browsing*, select the needed tags and click on "".
+
+
 
 ## Configure IIH Essentials
 
