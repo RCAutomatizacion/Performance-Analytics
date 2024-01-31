@@ -71,10 +71,12 @@ Industrial Edge:
 *	Industrial Edge Device V1.16.1-1-a
 *	SIMATIC S7 Connector V2.0.0-1
 * OPC UA Connector V2.0.1-0
-* Common Import Converter V2.0.0-1
+* Common Import Converter V2.1.0-2
 * Registry Service V1.9.0-0
 *	Databus V2.3.1
 *	Databus Configurator V 2.3.1-4
+*	Common Configurator V1.9.0-4
+*	Common Connect Configurator V1.9.1-1
 *	IIH Essentials V1.9.0
 *	Performance Insight V1.16.1
 *	WEB Browser (Google Chrome)
